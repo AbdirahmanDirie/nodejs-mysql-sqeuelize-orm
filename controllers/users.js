@@ -24,7 +24,9 @@ const signUp=  async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const user = await User.create({ name, email, password: hashedPassword });
+    const userId = generateUniqueNumber();
+
+    const user = await User.create({id:userId, name, email, password: hashedPassword });
     res.status(201).json({msg: 'User Regisred Successfully'});
   } catch (err) {
     console.error(err);
@@ -59,6 +61,8 @@ const signIn=  async (req, res) => {
         const token = generateToken(user.id);
         res.status(200).json({
           token: token,
+          name: user.name,
+          email: user.email,
           id: user.id,
         });
 
@@ -98,6 +102,21 @@ const updateUser = async (req, res) => {
   }
 };
 
+const delteUser = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const note = await User.findOne({where:{ email:email }});
+    if (!note) {
+      return res.status(404).json({ message: 'Note not found' });
+    }
+    await note.destroy();
+    res.json({ msg: 'User deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: 'Server Error' });
+  }
+};
+
 
 // Generate JWT
 const generateToken = (id) => {
@@ -107,9 +126,25 @@ const generateToken = (id) => {
 };
 
 
+function generateUniqueNumber() {
+  const characters = '23456789';
+  const firstTwoChars = '01';
+  let uniqueNumber = firstTwoChars;
+
+  // Generate random characters for the remaining length
+  const remainingLength = Math.floor(Math.random() * 3) + 6; // Generate random length between 8 and 10
+  for (let i = 0; i < remainingLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      uniqueNumber += characters.charAt(randomIndex);
+  }
+
+  return uniqueNumber;
+}
+
 module.exports = {
     signUp,
     signIn,
     getAllUser,
     updateUser,
+    delteUser
 };

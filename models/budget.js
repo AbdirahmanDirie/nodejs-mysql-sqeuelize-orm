@@ -7,6 +7,10 @@ const Budget = sequelize.define('Budget', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   amount: {
     type: DataTypes.INTEGER,
     allowNull: false

@@ -1,11 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const userRoute = require('./routes/users')
 const bugdetRoute = require('./routes/budget')
 
 const app = express();
 dotenv.config();
+app.use(cors());
+
 const PORT = process.env.PORT || 3000;
 
 
@@ -18,6 +21,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Welcome to My Note App');
 });
+
 
 app.use('/api/users', userRoute);
 app.use('/api/budget', bugdetRoute);

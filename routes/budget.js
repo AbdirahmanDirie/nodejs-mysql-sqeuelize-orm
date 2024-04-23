@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const {
     createBudget,
-    getAllBudgets
+    getAllBudgets,
+    delteBudget
 } = require('../controllers/budget')
 
 
@@ -20,6 +21,7 @@ router.get('/', userAuth, getAllBudgets)
 
 
 //DELETE
+router.delete('/:amount', delteBudget)
 
 
 module.exports = router

@@ -5,6 +5,7 @@ const {
     signIn,
     getAllUser,
     updateUser,
+    delteUser
 } = require('../controllers/users')
 
 
@@ -23,6 +24,7 @@ router.put('/user/:id', userAuth, updateUser)
 
 
 //DELETE
+router.delete('/user/:email', delteUser)
 
 
 module.exports = router
