@@ -1,6 +1,6 @@
 # Nodejs, Express, Mysql, and Sequilize ORM
 
-## .env File:
+## .env File
 - PORT 
 - NODE_ENV  
 - JWT_SECRET 
