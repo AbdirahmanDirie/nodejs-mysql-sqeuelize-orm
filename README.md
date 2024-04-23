@@ -2,7 +2,7 @@
 
 ## Setup
 ` npm install `
-` Npm start `
+` npm start `
 
 ## .env File
 - PORT 
