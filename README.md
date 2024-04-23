@@ -1,5 +1,9 @@
 # Nodejs, Express, Mysql, and Sequilize ORM
 
+## Setup
+` npm install `
+` Npm start `
+
 ## .env File
 - PORT 
 - NODE_ENV  
